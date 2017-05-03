@@ -27,7 +27,7 @@
       (case (get-in config [:deploy :type])
         :directory (ed/deploy-directory project)
         :library   (el/deploy-library project)
-        :uberjar   (eu/deploy-uberjar project)
+        :uberjar   (eu/deploy-uberjar project (get-in config [:deploy :uberjar-type]))
         (main/abort "Invalid deployment type specified:"
                     (get-in config [:deploy :type])))
       (main/abort "Invalid bucket specified:" (:bucket config)))

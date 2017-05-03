@@ -1,4 +1,4 @@
-(defproject lein-essthree "0.2.3-SNAPSHOT"
+(defproject lein-essthree "0.2.4"
   :description "Leiningen plugin for easy S3 project deployment and dependency resolution"
   :url "http://github.com/dparis/lein-essthree"
   :license {:name "MIT License"
@@ -16,7 +16,8 @@
                  [me.raynes/fs "1.4.6"]
                  [pandect "0.5.4"]
                  [pathetic "0.5.1"]
-                 [prismatic/schema "1.1.0"]]
+                 [prismatic/schema "1.1.0"]
+                 [lein-ring "0.11.0"]]
 
   :deploy-repositories [["releases" :clojars]]
 
