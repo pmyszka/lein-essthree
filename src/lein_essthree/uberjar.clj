@@ -4,22 +4,19 @@
             [leiningen.core.main :as main]
             [lein-essthree.s3 :as s3]
             [lein-essthree.schemas :refer [UberjarDeployConfig]]
-            [leiningen.uberjar :as uj]
-            [leiningen.ring.uberjar :as rj]
             [schema.core :as s]
-            [pandect.algo.md5 :as md5])
+            [pandect.algo.md5 :as md5]
+            [lein-essthree.uberjar-providers :as ujp])
   (:import [com.amazonaws AmazonServiceException]))
-
 
 (s/defn ^:private get-config :- UberjarDeployConfig
   [project]
   (get-in project [:essthree :deploy]))
 
 (s/defn ^:private compile-uberjar! :- s/Str
-  [project uberjar-type]
-  (case uberjar-type
-    :ring (rj/uberjar project)
-    :default (uj/uberjar project)))
+  [project uberjar-provider]
+  (let [uj-method (ujp/find-provider uberjar-provider)]
+    (uj-method project)))
 
 (s/defn ^:private put-uberjar-s3! :- (s/maybe s/Str)
   [config  :- UberjarDeployConfig
